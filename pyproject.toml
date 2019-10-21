@@ -22,6 +22,9 @@ to = {format = "setuppy", path = "setup.py"}
 versioning = "pep"
 prereleases = true
 
+[tool.poetry.scripts]
+atapi = 'atapi.py'
+
 #  _______________________________________
 # / If you update this file, please run   \
 # \ poetry update && dephell deps convert /
