@@ -30,7 +30,7 @@ setup(
     project_urls={'repository': 'https://github.com/charmasaur/atapi'},
     author='Harry Slatyer',
     author_email='harry.slatyer@gmail.com',
-    entry_points={'console_scripts': ['atapi = atapi.py']},
+    entry_points={'console_scripts': ['atapi = atapi.gen:main']},
     packages=['atapi'],
     package_data={},
     install_requires=[],

@@ -23,7 +23,7 @@ versioning = "pep"
 prereleases = true
 
 [tool.poetry.scripts]
-atapi = 'atapi.py'
+atapi = "atapi.gen:main"
 
 #  _______________________________________
 # / If you update this file, please run   \
