@@ -1,3 +1,7 @@
+"""
+A test package for the atapi project.
+"""
+
 # BEGIN ATAPI
 from test_pkg.mod import Public
 from test_pkg.mod import PublicABC
