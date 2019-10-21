@@ -39,7 +39,7 @@ def _generate_init_lines(pkg_name):
 
     all_lines = []
     for _, func_name in funcs:
-        all_lines.append("    {0},".format(func_name))
+        all_lines.append("    '{0}',".format(func_name))
     all_lines.sort()
 
     return import_lines + ["", "__all__ = ["] + all_lines + ["]"]

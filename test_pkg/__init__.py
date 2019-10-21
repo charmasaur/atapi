@@ -14,14 +14,14 @@ from test_pkg.spkg.mod import spkg_mod_public
 from test_pkg.spkg.mod2 import spkg_mod2_public
 
 __all__ = [
-    Public,
-    PublicABC,
-    PublicDataclass,
-    PublicDataclass2,
-    PublicWithFunction,
-    SpkgModPublic,
-    public,
-    spkg_mod2_public,
-    spkg_mod_public,
+    'Public',
+    'PublicABC',
+    'PublicDataclass',
+    'PublicDataclass2',
+    'PublicWithFunction',
+    'SpkgModPublic',
+    'public',
+    'spkg_mod2_public',
+    'spkg_mod_public',
 ]
 # END ATAPI
