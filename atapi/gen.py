@@ -44,7 +44,7 @@ def _generate_init_lines(pkg_name):
     return import_lines + ["", "__all__ = ["] + all_lines + ["]"]
 
 
-if __name__ == "__main__":
+def main():
     import argparse
     import os
     import sys
