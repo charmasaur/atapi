@@ -15,12 +15,13 @@ def _generate_init_lines(pkg_name):
     annotations), and generates text lines that import the public functions/classes and list them
     in the package's ``__all__`` attribute.
     """
-    # Override the api decorator to store API functions/classes.
-    funcs = []
+    # Override the api decorator to store API functions/classes. Use a set to eliminate duplicates,
+    # since we may end up loading the same module multiple times while walking the package tree.
+    funcs = set()
     def api_inner(func):
         # Only add top-level functions/classes.
         if func.__qualname__ == func.__name__:
-            funcs.append(func)
+            funcs.add((func.__module__, func.__name__))
         return func
     atapi.api = api_inner
 
@@ -32,13 +33,13 @@ def _generate_init_lines(pkg_name):
         module_info.module_finder.find_module(module_info.name).load_module()
 
     import_lines = []
-    for func in funcs:
-        import_lines.append("from {0} import {1}".format(func.__module__, func.__name__))
+    for func_module, func_name in funcs:
+        import_lines.append("from {0} import {1}".format(func_module, func_name))
     import_lines.sort()
 
     all_lines = []
-    for func in funcs:
-        all_lines.append("    {0},".format(func.__name__))
+    for _, func_name in funcs:
+        all_lines.append("    {0},".format(func_name))
     all_lines.sort()
 
     return import_lines + ["", "__all__ = ["] + all_lines + ["]"]
