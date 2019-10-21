@@ -48,7 +48,6 @@ def _generate_init_lines(pkg_name):
 def main():
     import argparse
     import os
-    import sys
 
     parser = argparse.ArgumentParser(description="Generate __init__ file from atapi annotations..")
     parser.add_argument('pkg_name',
@@ -61,7 +60,7 @@ def main():
     print("Looking for package {0}".format(pkg_name))
     if not os.path.isdir(pkg_name):
         print("{0} is not a sub-directory of the current working directory".format(pkg_name))
-        sys.exit(1)
+        return 1
 
     init_fn = "./{0}/__init__.py".format(pkg_name)
     print("Looking for {0}".format(init_fn))
@@ -79,13 +78,13 @@ def main():
     end_lines = [i for i, line in enumerate(lines) if line.rstrip() == "# END ATAPI"]
     if len(begin_lines) is not 1:
         print("__init__.py must contain exactly one line of the form \"# BEGIN ATAPI\"")
-        sys.exit(1)
+        return 1
     if len(end_lines) is not 1:
         print("__init__.py must contain exactly one line of the form \"# END ATAPI\"")
-        sys.exit(1)
+        return 1
     if begin_lines[0] >= end_lines[0]:
         print("__init__.py's \"# BEGIN ATAPI\" line must occur before its \"# END ATAPI\" line")
-        sys.exit(1)
+        return 1
 
     print("Generating new __init__ file")
     new_lines = (lines[:begin_lines[0]+1]
@@ -96,3 +95,5 @@ def main():
     with open(init_fn, "w") as f:
         for line in new_lines:
             f.write(line)
+
+    return 0
